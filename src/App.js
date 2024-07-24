@@ -2,40 +2,43 @@ import React, { useState } from "react";
 import Income from "./components/Income";
 import Expense from "./components/Expense";
 import Loan from "./components/Loan";
-import UserInput from "./components/UserInput";
+import LocalStorageTest from "./components/LocalStorageTest";
+// import UserInput from "./components/UserInput";
 
 const App = () => {
-  //STATE VARAIBLE FOR TOTAL BUDGET
-  const [totalBudgetAmount, setTotalBudgetAmount] = useState(0);
+  //OBJECT FOR TOTAL BUDGET
+  let totalBudget = 0;
 
-  //STATE VARIABLE FOR INCOME
-  const [incomeAmount, setIncomeAmount] = useState(0);
-  const [incomeCategory, setIncomeCategory] = useState("job");
-
-  //STATE VARIABLE FOR EXPENSE
-  const [expenseAmount, setExpenseAmount] = useState(0);
-  const [expenseCategory, setExpenseCategory] = useState("food");
-
-  //STATE VARIABLE FOR LOAN
-  const [loanAmount, setLoanAmount] = useState(0);
-  const [loanCategory, setLoanCategory] = useState("house");
+  //OBJECT FOR HISTORY
+  let history = { amount: 0, inputType: "", inputCategory: "" };
 
   //INCOME SUBMIT
   const incomeSubmitHandler = (e) => {
     e.preventDefault();
-    setTotalBudgetAmount(Number(totalBudgetAmount) + Number(incomeAmount));
+    history = {
+      amount: e.target[0].value,
+      inputType: "income",
+      inputCategory: e.target[1].value,
+    };
+    localStorage.setItem(Math.random(), history);
+
+    //RETRIVE TOTAL AMOUNT
+    totalBudget = Number(localStorage.getItem("Total Budget Amount"));
+    //ADD INCOME AMOUNT AND TOTAL AMOUNT
+    totalBudget += history.amount;
+    localStorage.setItem("Total Budget Amount", totalBudget);
   };
 
   //EXPENSE SUBMIT
   const expenseSubmitHandler = (e) => {
     e.preventDefault();
-    setTotalBudgetAmount(Number(totalBudgetAmount) - Number(expenseAmount));
+    //setTotalBudgetAmount(Number(totalBudgetAmount) - Number(expenseAmount));
   };
 
   //LOAN SUBMIT
   const loanSubmitHandler = (e) => {
     e.preventDefault();
-    setTotalBudgetAmount(Number(totalBudgetAmount) + Number(loanAmount));
+    //setTotalBudgetAmount(Number(totalBudgetAmount) + Number(loanAmount));
   };
 
   return (
@@ -44,31 +47,20 @@ const App = () => {
       <div className="total-budget">
         <label>
           <h1>Total Budget is:</h1>
-          Rs.{totalBudgetAmount}
+          Rs.0
         </label>
       </div>
 
       {/* USER INPUT */}
-      <UserInput />
-      
+      {/* <UserInput /> */}
 
-      {/* <Income
-        setIncomeAmount={setIncomeAmount}
-        setIncomeCategory={setIncomeCategory}
-        incomeSubmitHandler={incomeSubmitHandler}
-      /> 
+      <Income incomeSubmitHandler={incomeSubmitHandler} />
 
-      <Expense
-        setExpenseAmount={setExpenseAmount}
-        setExpenseCategory={setExpenseCategory}
-        expenseSubmitHandler={expenseSubmitHandler}
-      />
+      <Expense expenseSubmitHandler={expenseSubmitHandler} />
 
-      <Loan
-        setLoanAmount={setLoanAmount}
-        setLoanCategory={setLoanCategory}
-        loanSubmitHandler={loanSubmitHandler}
-      />*/}
+      <Loan loanSubmitHandler={loanSubmitHandler} />
+
+      {/* <LocalStorageTest /> */}
     </React.Fragment>
   );
 };

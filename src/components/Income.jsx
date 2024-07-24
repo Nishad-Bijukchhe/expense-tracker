@@ -1,8 +1,6 @@
 import React from "react";
 
 const Income = ({
-  setIncomeAmount,
-  setIncomeCategory,
   incomeSubmitHandler,
 }) => {
   return (
@@ -15,11 +13,9 @@ const Income = ({
             id="income"
             placeholder="Enter your income"
             className="form-control"
-            onChange={(e) => setIncomeAmount(e.target.value)}
           ></input>
           <select
             name="income-type"
-            onChange={(e) => setIncomeCategory(e.target.value)}
           >
             <option value="job">Job</option>
             <option value="rent">Rent</option>
