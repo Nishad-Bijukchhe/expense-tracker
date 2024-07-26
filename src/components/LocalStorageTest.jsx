@@ -19,7 +19,7 @@ const LocalStorageTest = () => {
 
   return (
     <React.Fragment>
-      <form className="form mt-4" onSubmit={saveData}>
+      {/* <form className="form mt-4" onSubmit={saveData}>
         <label htmlFor="input" className="form-label">
           Number
         </label>
@@ -39,10 +39,10 @@ const LocalStorageTest = () => {
         <button className="btn btn-primary" type="submit">
           Store locally
         </button>
-      </form>
-      <button className="btn btn-danger" onClick={showLocalData}>
+      </form> */}
+      {/* <button className="btn btn-danger" onClick={showLocalData}>
         Show Local Data
-      </button>
+      </button> */}
 
       <div>
         <button
@@ -53,6 +53,8 @@ const LocalStorageTest = () => {
         >
           Initiate Total Amount in localStorage
         </button>
+
+        <button className="btn btn-warning">Clear Local Storage</button>
       </div>
     </React.Fragment>
   );
