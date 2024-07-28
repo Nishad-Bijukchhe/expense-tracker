@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import UserInputCategory from "./UserInputCategory";
+import inputTypes from "../constants/inputTypes";
+import { inputCategoriesOfIncome } from "../constants/inputCategories";
 
 const UserInput = ({ setTotalBudgetAmount }) => {
   //INPUT TYPE STATE VARIABLE
@@ -14,13 +16,16 @@ const UserInput = ({ setTotalBudgetAmount }) => {
   const transactionSubmitHandler = (e) => {
     e.preventDefault();
 
+    //TESTING CONSTANTS
+    console.log("inputTypes: ", inputTypes);
+    console.log("inputCategoriesOfIncome: ", inputCategoriesOfIncome);
+
     //INPUT DATA
     let history = {
       amount: e.target[0].value,
       inputType: e.target[1].value,
       inputCategory: inputCategory,
     };
-    console.log(history);
 
     //ADD DATA TO LOCALSTORAGE
     localStorage.setItem(Math.random(), JSON.stringify(history));
