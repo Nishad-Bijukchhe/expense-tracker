@@ -1,7 +1,7 @@
 const inputTypes = {
-  type1: "income",
-  type2: "expense",
-  type3: "loan",
+  income: "Income",
+  expense: "Expense",
+  loan: "Loan",
 };
 
 export default inputTypes;

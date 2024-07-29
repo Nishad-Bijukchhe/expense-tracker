@@ -1,20 +1,20 @@
 const inputCategoriesOfIncome = {
-  type1: "job",
-  type2: "rent",
-  type3: "intrest",
+  job: "Job",
+  rent: "Rent",
+  intrest: "Intrest",
 };
 
 const inputCategoriesOfExpense = {
-  type1: "food",
-  type2: "rent",
-  type3: "travel",
-  type4: "loan",
+  food: "Food",
+  rent: "Rent",
+  travel: "Travel",
+  loan: "Loan",
 };
 
 const inputCategoriesOfLoan = {
-  type1: "house-loan",
-  type2: "car-loan",
-  type3: "business-loan",
+  house: "House-loan",
+  car: "Car-loan",
+  business: "Business-loan",
 };
 
 export {
