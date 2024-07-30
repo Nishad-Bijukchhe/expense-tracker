@@ -37,6 +37,8 @@ const UserInput = ({ setTotalBudgetAmount }) => {
       inputCategory: transactionCategory,
     };
 
+    e.target[0].value = null;
+
     //ADD DATA TO LOCALSTORAGE
     localStorage.setItem(Math.random(), JSON.stringify(history));
 
@@ -56,32 +58,34 @@ const UserInput = ({ setTotalBudgetAmount }) => {
   return (
     <React.Fragment>
       {/* AMOUNT OF MONEY */}
-      <form className="m-2" onSubmit={transactionSubmitHandler}>
-        <div>
-          <label className="form-label">Amount</label>
+      <form
+        className="m-2 container text-center"
+        onSubmit={transactionSubmitHandler}
+      >
+        <div className="row">
+          <div className="col">
+            <label className="form-label">Amount</label>
+            <input
+              className="form-control me-5 ms-1 mb-2"
+              type="number"
+              placeholder="Enter amount of money"
+            />
+          </div>
+          <div className="mb-2 col">
+            <label className="form-label d-block">Transaction Type</label>
+            <SelectInput
+              options={inputTypes}
+              updateFunction={setTransactionType}
+            />
+          </div>
+          <div className="col">
+            <label className="d-block">Transaction Category</label>
+            <SelectInput
+              options={categoryOptions}
+              updateFunction={setTransactionCategory}
+            />
+          </div>
         </div>
-
-        <div>
-          <input
-            className="form-control me-5 ms-1 mb-2"
-            type="number"
-            placeholder="Enter amount of money"
-          />
-        </div>
-        <label className="form-label">Transaction Type</label>
-        <div className="mb-2">
-          <SelectInput
-            options={inputTypes}
-            updateFunction={setTransactionType}
-          />
-        </div>
-        <div>
-          <SelectInput
-            options={categoryOptions}
-            updateFunction={setTransactionCategory}
-          />
-        </div>
-
         <button type="submit" className="btn btn-primary mt-3 ms-2">
           Submit
         </button>

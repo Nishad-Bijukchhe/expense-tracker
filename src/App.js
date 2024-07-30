@@ -13,12 +13,13 @@ const App = () => {
   let itemsInLocalStorage = { ...localStorage };
 
   return (
-    <React.Fragment>
+    <div className="bg-body-secondary">
       {/* TOTAL BUDGET */}
-      <div className="total-budget">
-        <label>
-          <h1>Total Budget is: Rs.{totalBudgetAmount}</h1>
+      <div className="total-budget h1 text-center">
+        <label className="">
+          Total Budget is: 
         </label>
+        <span className="">Rs.{totalBudgetAmount}</span>
       </div>
 
       {/* USER INPUT */}
@@ -28,7 +29,7 @@ const App = () => {
 
       {/* HISTORY OF TRANSACTIONS */}
       <History itemsInLocalStorage={itemsInLocalStorage} />
-    </React.Fragment>
+    </div>
   );
 };
 
