@@ -1,20 +1,30 @@
-import React, { useState } from "react";
-//import UserInputCategory from "./UserInputCategory";
+import React, { useEffect, useState } from "react";
 import inputTypes from "../constants/inputTypes";
 import {
-  inputCategoriesOfIncome,
-  inputCategoriesOfExpense,
-  inputCategoriesOfLoan,
+  incomeCategories,
+  expenseCategories,
+  loanCategories,
 } from "../constants/inputCategories";
-import SelectTransaction from "./SelectTransaction";
+import SelectInput from "./SelectInput";
 
 const UserInput = ({ setTotalBudgetAmount }) => {
   //INPUT TYPE STATE VARIABLE
-  const [inputTransactionType, setInputTransactionType] = useState("Income");
+  const [transactionType, setTransactionType] = useState("income");
 
   //INPUT CATEGORY STATE VARIABLE
-  const [inputTransactionCategory, setInputTransactionCategory] =
-    useState("Job");
+  const [transactionCategory, setTransactionCategory] = useState("job");
+
+  //INPUT CATEGORY OPTIONS STATE VARIABLE
+  const [categoryOptions, setCategoryOptions] = useState(incomeCategories);
+
+  //USE-EFFECT
+  useEffect(() => {
+    transactionType === "income"
+      ? setCategoryOptions(incomeCategories)
+      : transactionType === "expense"
+      ? setCategoryOptions(expenseCategories)
+      : setCategoryOptions(loanCategories);
+  }, [transactionType]);
 
   //TRANSACTION SUBMIT || FORM SUBMISSION
   const transactionSubmitHandler = (e) => {
@@ -24,25 +34,23 @@ const UserInput = ({ setTotalBudgetAmount }) => {
     let history = {
       amount: e.target[0].value,
       inputType: e.target[1].value,
-      inputCategory: inputTransactionCategory,
+      inputCategory: transactionCategory,
     };
 
-    console.log(history);
-
     //ADD DATA TO LOCALSTORAGE
-    // localStorage.setItem(Math.random(), JSON.stringify(history));
+    localStorage.setItem(Math.random(), JSON.stringify(history));
 
     //GET AND UPDATE TOTAL BUDGET
-    // let totalBudget = Number(localStorage.getItem("Total Budget Amount"));
-    // if (history.inputType === "Income" || history.inputType === "Loan") {
-    //   totalBudget += Number(history.amount);
-    //   localStorage.setItem("Total Budget Amount", totalBudget);
-    //   setTotalBudgetAmount(totalBudget);
-    // } else {
-    //   totalBudget -= Number(history.amount);
-    //   localStorage.setItem("Total Budget Amount", totalBudget);
-    //   setTotalBudgetAmount(totalBudget);
-    // }
+    let totalBudget = Number(localStorage.getItem("Total Budget Amount"));
+    if (history.inputType === "income" || history.inputType === "loan") {
+      totalBudget += Number(history.amount);
+      localStorage.setItem("Total Budget Amount", totalBudget);
+      setTotalBudgetAmount(totalBudget);
+    } else {
+      totalBudget -= Number(history.amount);
+      localStorage.setItem("Total Budget Amount", totalBudget);
+      setTotalBudgetAmount(totalBudget);
+    }
   };
 
   return (
@@ -62,36 +70,18 @@ const UserInput = ({ setTotalBudgetAmount }) => {
         </div>
         <label className="form-label">Transaction Type</label>
         <div className="mb-2">
-          <SelectTransaction
-            mappingData={inputTypes}
-            updateFunction={setInputTransactionType}
+          <SelectInput
+            options={inputTypes}
+            updateFunction={setTransactionType}
           />
-          <br />
-
-          {inputTransactionType === "Income" ? (
-            <SelectTransaction
-              mappingData={inputCategoriesOfIncome}
-              updateFunction={setInputTransactionCategory}
-            />
-          ) : inputTransactionType === "Expense" ? (
-            <SelectTransaction
-              mappingData={inputCategoriesOfExpense}
-              updateFunction={setInputTransactionCategory}
-            />
-          ) : (
-            <SelectTransaction
-              mappingData={inputCategoriesOfLoan}
-              updateFunction={setInputTransactionCategory}
-            />
-          )}
         </div>
-
         <div>
-          {/* <UserInputCategory
-            inputType={inputType}
-            setInputCategory={setInputCategory}
-          /> */}
+          <SelectInput
+            options={categoryOptions}
+            updateFunction={setTransactionCategory}
+          />
         </div>
+
         <button type="submit" className="btn btn-primary mt-3 ms-2">
           Submit
         </button>
