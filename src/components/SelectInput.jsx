@@ -3,7 +3,7 @@ import React from "react";
 const SelectInput = ({ options, updateFunction }) => {
   return (
     <select
-      className="btn btn-primary m-2"
+      className="btn btn-default m-2"
       name="input"
       onChange={(e) => {
         updateFunction(e.target.value);

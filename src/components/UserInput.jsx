@@ -59,14 +59,14 @@ const UserInput = ({ setTotalBudgetAmount }) => {
     <React.Fragment>
       {/* AMOUNT OF MONEY */}
       <form
-        className="m-2 container text-center"
+        className="m-2 container text-center border"
         onSubmit={transactionSubmitHandler}
       >
         <div className="row">
           <div className="col">
             <label className="form-label">Amount</label>
             <input
-              className="form-control me-5 ms-1 mb-2"
+              className="form-control me-5 ms-1 mb-2 w-400"
               type="number"
               placeholder="Enter amount of money"
             />
@@ -85,10 +85,15 @@ const UserInput = ({ setTotalBudgetAmount }) => {
               updateFunction={setTransactionCategory}
             />
           </div>
+          <div className="col ">
+            <button
+              type="submit"
+              className="btn btn-primary  "
+            >
+              Submit
+            </button>
+          </div>
         </div>
-        <button type="submit" className="btn btn-primary mt-3 ms-2">
-          Submit
-        </button>
       </form>
     </React.Fragment>
   );

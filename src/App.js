@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import History from "./components/History";
 import UserInput from "./components/UserInput";
+import CommaSeperation from "./utils/CommaSeperation";
 //import LocalStorageTest from "./components/LocalStorageTest";
 
 const App = () => {
@@ -16,10 +17,8 @@ const App = () => {
     <div className="bg-body-secondary">
       {/* TOTAL BUDGET */}
       <div className="total-budget h1 text-center">
-        <label className="">
-          Total Budget is: 
-        </label>
-        <span className="">Rs.{totalBudgetAmount}</span>
+        <label className="">Total Budget is: </label>
+        <span className="">{CommaSeperation(totalBudgetAmount)}</span>
       </div>
 
       {/* USER INPUT */}
